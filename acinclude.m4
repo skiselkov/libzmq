@@ -1199,7 +1199,7 @@ AC_DEFUN([LIBZMQ_CHECK_CV_IMPL], [{
     # Allow user to override condition variable autodetection
     AC_ARG_WITH([cv-impl],
         [AS_HELP_STRING([--with-cv-impl],
-        [choose condition variable implementation manually. Valid values are 'stl11', 'pthread', 'none', or 'auto'. [default=auto]])])
+        [choose condition variable implementation manually. Valid values are 'stl11', 'pthread', 'win32api', 'none', or 'auto'. [default=auto]])])
 
     if test "x$with_cv_impl" = "x"; then
         cv_impl=auto
@@ -1224,6 +1224,9 @@ AC_DEFUN([LIBZMQ_CHECK_CV_IMPL], [{
     fi
     if test "$cv_impl" = "pthread" || test "x$stl11" = "xno"; then
         AC_DEFINE(ZMQ_USE_CV_IMPL_PTHREADS, 1, [Use pthread condition variable implementation.])
+    fi
+    if test "$cv_impl" = "win32api"; then
+        AC_DEFINE(ZMQ_USE_CV_IMPL_WIN32API, 1, [Use win32api condition variable implementation.])
     fi
     if test "$cv_impl" = "none"; then
         AC_DEFINE(ZMQ_USE_CV_IMPL_NONE, 1, [Use no condition variable implementation.])

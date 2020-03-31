@@ -321,10 +321,12 @@ void expect_monitor_event_v2 (void *monitor_,
     char buf[256];
     char *pos = buf;
     if (event != expected_event_) {
+#ifndef	__MINGW32__
         pos += snprintf (pos, sizeof buf - (pos - buf),
                          "Expected monitor event %llx, but received %llx\n",
                          static_cast<long long> (expected_event_),
                          static_cast<long long> (event));
+#endif
         failed = true;
     }
     if (expected_local_address_

@@ -145,7 +145,7 @@ fi
 
 # IPC is available on all platforms supported by autotools build at the moment except OpenVMS and VxWorks.
 case "${host_os}" in
-    *vxworks*|*openvms*)
+    *vxworks*|*openvms*|*mingw32*)
         ;;
     *)
         AC_DEFINE(ZMQ_HAVE_IPC, 1, [Have AF_UNIX sockets for ipc transport])
